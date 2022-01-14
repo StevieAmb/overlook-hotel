@@ -7,6 +7,10 @@ class User {
     this.roomAlreadyBooked = []; //need a method for this
   }
 }
+
+
+
+
 //method to get user rooms already books.
 export default User;
 
