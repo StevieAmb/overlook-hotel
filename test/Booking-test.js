@@ -3,7 +3,7 @@ import userBookingData from '../data/sample-booking-data';
 import chai from 'chai';
 const expect = chai.expect;
 
-describe('User', () => {
+describe('Booking', () => {
   let booking;
   beforeEach(() => {
     booking = new Booking(userBookingData[0]);
@@ -14,7 +14,7 @@ describe('User', () => {
       expect(Booking).to.be.a('function');
     });
 
-    it('Should be an instance of User', () => {
+    it('Should be an instance of Booking', () => {
       expect(booking).to.be.an.instanceOf(Booking);
     });
 
