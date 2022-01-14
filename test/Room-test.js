@@ -8,7 +8,6 @@ describe('Room', () => {
 
   beforeEach(() => {
     room = new Room(userRoomData[0]);
-    console.log(room);
   });
 
     it('Should be a function', () => {
