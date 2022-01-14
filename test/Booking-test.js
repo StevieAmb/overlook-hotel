@@ -6,7 +6,8 @@ const expect = chai.expect;
 describe('User', () => {
   let booking;
   beforeEach(() => {
-    user = new Booking()
+    booking = new Booking(userBookingData[0]);
+    // console.log(booking);
   });
 
     it('Should be a function', () => {
@@ -25,6 +26,14 @@ describe('User', () => {
       expect(booking.userID).to.equal(userBookingData[0].userID);
     });
 
-    it('Should have a date', () => )
+    it('Should have a date', () => {
+      expect(booking.date).to.equal(userBookingData[0].date)
+    });
+
+    it('Should have a room number', () => {
+      expect(booking.roomNumber).to.equal(userBookingData[0].roomNumber);
+    });
+
+
 
   })
