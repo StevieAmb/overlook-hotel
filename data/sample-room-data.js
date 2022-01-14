@@ -38,7 +38,15 @@ const userRoomData = [
   "bedSize": "queen",
   "numBeds": 2,
   "costPerNight": 340.17
-  }
+  },
+  {
+    "number": 18,
+    "roomType": "junior suite",
+    "bidet": false,
+    "bedSize": "king",
+    "numBeds": 2,
+    "costPerNight": 496.41
+    },
 ]
 
-export default userRoomData;
+export default userRoomData
