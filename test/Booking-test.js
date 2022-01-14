@@ -7,7 +7,7 @@ describe('Booking', () => {
   let booking;
   beforeEach(() => {
     booking = new Booking(userBookingData[0]);
-    // console.log(booking);
+
   });
 
     it('Should be a function', () => {
@@ -33,7 +33,6 @@ describe('Booking', () => {
     it('Should have a room number', () => {
       expect(booking.roomNumber).to.equal(userBookingData[0].roomNumber);
     });
-
 
 
   })
