@@ -11,6 +11,7 @@
     <h1 class="page-title" id="pageTitle">Overlook Hotel</h1>
     <button class="home-button" id="homeButton">Home</button>
     <button class="see-user-dash" id="seeUserDash">See My Dashboard</button>
+    <button class="book-a-room" id="bookARoom">Book A Room</button>
     <div class="dropdown">
       <button class="dropbtn" id="dropDownButton">Search By Room Type</button>
       <div class="dropdown-content" id="myDropdown">
@@ -21,7 +22,7 @@
 </header>
 <body>
   <!-- <img src="../src/images/turing-logo.png" id="turingLogo" alt="turing logo"> -->
-  <section class="login-page" id="loginPageView">
+  <section class="login-page hidden" id="loginPageView">
     <form>
       <label for="userName">UserName:</label><br>
       <input type="text" id="userName" name="username" required><br>
@@ -31,28 +32,28 @@
     </form> 
   </section>
 
-  <h3 class="total-spent" id="totalSpent">Total User Spent</h3>
-  <section class="user-dashboard make-row" id="userDashboard">
+  <section class="user-dashboard make-row hidden" id="userDashboard">
+    <h3 class="total-spent" id="totalSpent">Total User Spent</h3>
 <!-- User Dashboard View -->
   </section>
 
   <section class="user-check-in" id="userCheckIn">
-    <form action="/action_page.php">
-      <label for="birthday">Birthday:</label>
-      <input type="date" id="birthday" name="birthday">
-      <input type="submit">
+    <form>
+      <label for="checkInCalendar">Pick a check in date:</label>
+      <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2022-12-31">
+      <input type="submit" id="checkInButton" value="Check In!">
     </form>
   </section>
 
-  <section class="available-rooms-view" id="availableRoomsView">
+  <section class="available-rooms-view hidden" id="availableRoomsView">
   <!-- User Available Rooms by Date View -->
   </section>
 
-  <section class="filtered-results-view" id="filteredResultsView">
+  <section class="filtered-results-view hidden" id="filteredResultsView">
     <!-- Filtered Rooms View -->
   </section>
 
-  <section class="booked-room-view" id="bookedRoomView">
+  <section class="booked-room-view hidden" id="bookedRoomView">
   <!-- Booked a room View (from clicking an available room) -->
   </section>
   
