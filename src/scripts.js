@@ -34,6 +34,9 @@ const filteredResultsView = document.getElementById('filteredResultsView');
 const bookedRoomView = document.getElementById('bookedRoomView');
 const navBar = document.getElementById('navBar');
 
+//RANDOM QUERIES
+const totalSpentLine = document.getElementById('totalSpent');
+
 //CLASS INSTANTIATIONS
 let user;
 let randomUser
@@ -60,22 +63,27 @@ const getRandomIndex = (array) => {
 const loadPage = () => {
   getData()
   .then((data) => {
+    //USER
     user = new User(data[0].customers[0]);
     user.findBookedRooms(data[2].bookings)
+    user.getTotalSpentOnRooms(data[1].rooms)
+    
     displayUserDashBoard(user)
-    room = new Room(data[1].rooms);
-    console.log("a room", room);
+
+    console.log("$$$", user.totalSpent);
+    //BOOKINGS
     booking = new Booking(data[2].bookings)
-    console.log(booking);
   })
   showUserDashBoardView();
   displayUserDashBoard();
 }
 
 const displayUserDashBoard = (user) => {
+  console.log(user.totalSpent);
   user.roomsAlreadyBooked.forEach(booking => {
-    userDashboard.innerHTML += 
-    `<p>${booking.id}</p>
+    totalSpentLine.innerText = `So far, you have spent $${user.totalSpent}!`;
+    userDashboard.innerHTML += `
+    <p>${booking.id}</p>
     <p>${booking.userID}</p>
     <p>${booking.date}</p>
     <p>${booking.roomNumber}</p>`
