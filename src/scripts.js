@@ -16,13 +16,16 @@ import Booking from './Booking';
 
 //BUTTONS
 const homeButton = document.getElementById('homeButton');
-const seeMyDashBoard = document.getElementById('seeUserDash');
+const seeMyDashBoardButton = document.getElementById('seeUserDash');
 const roomTypeDropdownButton = document.getElementById('dropDownButton');
-const loginButton = document.getElementById('');
+const loginButton = document.getElementById('loginButton');
+const bookARoomButton = document.getElementById('bookARoom')
+const checkInButton = document.getElementById('checkInButton')
 
 //USER INPUTS
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('loginButton');
+const dateInput = document.getElementById('checkInCalendar')
 
 
 //VIEWS
@@ -79,6 +82,8 @@ const loadPage = () => {
 }
 
 const displayUserDashBoard = (user) => {
+  totalSpentLine.innerText = "";
+  userDashboard.innerHTML = "";
   console.log(user.totalSpent);
   user.roomsAlreadyBooked.forEach(booking => {
     totalSpentLine.innerText = `So far, you have spent $${user.totalSpent}! Thank you for trusting OverLook!`;
@@ -93,6 +98,10 @@ const displayUserDashBoard = (user) => {
 
 
 //HELPER FUNCTIONS
+const showCalendarValue = (event) => {
+  event.preventDefault();
+  console.log(dateInput.value)
+}
 
 
 
@@ -147,7 +156,7 @@ const displayUserDashBoard = (user) => {
 
 //VIEWS 
 const showUserDashBoardView = () => {
-  show([userDashboard, navBar]);
+  show([userDashboard, seeMyDashBoardButton]);
   hide([loginView, availableRoomsView, filteredResultsView, bookedRoomView, userCheckInView]);
 }
 
@@ -177,7 +186,9 @@ const showBookingRoomView = () => {
 }
 
 
-console.log('This is the JavaScript entry file - your code begins here.');
+// console.log('This is the JavaScript entry file - your code begins here.');
 
-window.addEventListener('load', loadPage);
+seeMyDashBoardButton.addEventListener('click', loadPage);
+bookARoomButton.addEventListener('click', showUserCheckInView);
+checkInButton.addEventListener('click', showCalendarValue)
 
