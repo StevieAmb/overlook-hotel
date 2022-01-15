@@ -4,6 +4,7 @@ import userBookingData from '../data/sample-booking-data';
 import Booking from '../src/Booking';
 import User from '../src/User';
 import chai from 'chai';
+import userBookingDdata from '../data/sample-booking-data';
 const expect = chai.expect;
 
 describe('User', () => {
@@ -50,6 +51,17 @@ describe('User', () => {
       user1.getTotalSpentOnRooms(userRoomData);
       expect(user1.totalSpent).to.equal(836.58)
     });
+
+    it('Should tell what has been booked on the date you have selected', () => {
+      user1.findBookingsByDate("2022/02/16", userBookingDdata)
+
+      expect(user1.unavailableRooms[0]).to.equal(userBookingData[2])
+      expect(user1.unavailableRooms[1]).to.equal(userBookingDdata[4])
+    })
+
+    it('Should tell you available rooms based on rooms already booked', () => {
+
+    })
 
   })
     
