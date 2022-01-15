@@ -1,9 +1,11 @@
+import userRoomData from "../data/sample-room-data";
 
 class User {
   constructor(user) {
     this.id = user.id;
     this.name = user.name;
     this.roomsAlreadyBooked = []; //need a method for this
+    this.totalSpent = 0;
   }
 
   findBookedRooms = (bookings) => {
@@ -16,15 +18,18 @@ class User {
   }
 
   getTotalSpentOnRooms = (userRoomData) => {
-    let totalSpent = this.roomsAlreadyBooked.reduce((acc, userRoom) => {
+    let totalUserSpent = this.roomsAlreadyBooked.reduce((acc, userRoom) => {
       userRoomData.forEach(randomRoom => {
         if(userRoom.roomNumber === randomRoom.number) {
-          acc += randomRoom.costPerNight;
+          console.log("a sign", randomRoom.costPerNight);
+          console.log("a user room", userRoom);
+          acc += randomRoom.costPerNight
         }
       })
+      console.log(acc);
       return acc
     }, 0)
-    return totalSpent;
+    this.totalSpent = totalUserSpent;
   }
 }
 

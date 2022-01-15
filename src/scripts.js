@@ -2,12 +2,15 @@
 // Do not delete or rename this file ********
 
 // An example of how you tell webpack to use a CSS (SCSS) file
-import './apiCalls';
+import { fetchApiData } from './apiCalls';
 
 import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
+import Room from './Room';
+import User from './User';
+import Booking from './Booking';
 
 //QUERY SELECTORS
 
@@ -25,38 +28,71 @@ const passwordInput = document.getElementById('loginButton');
 //VIEWS
 const loginView = document.getElementById('loginPageView')
 const userDashboard = document.getElementById('userDashboard');
-const userCheckIn = document.getElementById('userCheckIn');
+const userCheckInView = document.getElementById('userCheckIn');
 const availableRoomsView = document.getElementById('availableRoomsView');
 const filteredResultsView = document.getElementById('filteredResultsView');
 const bookedRoomView = document.getElementById('bookedRoomView');
 const navBar = document.getElementById('navBar');
 
+//RANDOM QUERIES
+const totalSpentLine = document.getElementById('totalSpent');
+
+//CLASS INSTANTIATIONS
+let user;
+let randomUser
+let booking;
+let room;
 
 //FUNCTIONS
 
 function getData() {
-  return Promise.all([fetchApiData('ingredients'), fetchApiData('recipes'), fetchApiData('users')]);
+  return Promise.all([fetchApiData('customers'), fetchApiData('rooms'), fetchApiData('bookings')]);
+}
+const show = (elements) => {
+  elements.forEach(element => element.classList.remove('hidden'));
 }
 
-const loadPage = () = {
-  getData()
+const hide = (elements) => {
+  elements.forEach(element => element.classList.add('hidden'));
+}
 
+const getRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.length);
+}
+
+const loadPage = () => {
+  getData()
+  .then((data) => {
+    //USER
+    user = new User(data[0].customers[0]);
+    user.findBookedRooms(data[2].bookings)
+    user.getTotalSpentOnRooms(data[1].rooms)
+    
+    displayUserDashBoard(user)
+
+    console.log("$$$", user.totalSpent);
+    //BOOKINGS
+    booking = new Booking(data[2].bookings)
+  })
+  showUserDashBoardView();
+  displayUserDashBoard();
+}
+
+const displayUserDashBoard = (user) => {
+  console.log(user.totalSpent);
+  user.roomsAlreadyBooked.forEach(booking => {
+    totalSpentLine.innerText = `So far, you have spent $${user.totalSpent}!`;
+    userDashboard.innerHTML += `
+    <p>${booking.id}</p>
+    <p>${booking.userID}</p>
+    <p>${booking.date}</p>
+    <p>${booking.roomNumber}</p>`
+  })
 }
 
 
 //HELPER FUNCTIONS
 
-const show = (elements) => {
-  elements.forEach(element => element.classList.remove('hidden'));
-},
-
-const hide = (elements) => {
-  elements.forEach(element => element.classList.add('hidden'));
-},
-
-const getRandomIndex = (array) => {
-  return Math.floor(Math.random() * array.length);
-},
 
 
 
@@ -93,7 +129,16 @@ const getRandomIndex = (array) => {
 
 
 //DISPLAY FUNCTIONS
+// const displayUserDashBoard = () => {
+//   showUserDashBoardView();
+//   user.findBookedRooms(booking)
+// }
 
+// PSEUDOCODE
+
+// // //the user 1, has to match the booking by user ID in order to display
+// for each of the total booking data, if the user.id matched booking.userID,
+// then, display the booking. 
 
 
 
@@ -101,30 +146,37 @@ const getRandomIndex = (array) => {
 
 //VIEWS 
 const showUserDashBoardView = () => {
-  show([userDashboard]);
-  hide([]);
+  show([userDashboard, navBar]);
+  hide([loginView, availableRoomsView, filteredResultsView, bookedRoomView, userCheckInView]);
 }
 
 const showLoginPageView = () => {
-  show([]);
-  hide([]);
+  show([loginView]);
+  hide([userDashboard, navBar, availableRoomsView, filteredResultsView, userCheckInView, bookedRoomView]);
 }
 
 const showAvailableRoomsView = () => {
-  show([]);
-  hide([]);
+  show([navBar, userDashboard]);
+  hide([loginView, availableRoomsView, filteredResultsView, userCheckInView, bookedRoomView]);
 }
 
 const showFilteredRoomsView = () => {
-  show([])
-  hide([])
+  show([navBar, filteredResultsView])
+  hide([loginView, availableRoomsView, userDashboard, userCheckInView, bookedRoomView])
 }
 
 const showUserCheckInView = () => {
-  show([]);
-  hide([]);
+  show([navBar,, userCheckInView]);
+  hide([loginView, availableRoomsView, userDashboard, userCheckInView, filteredResultsView]);
+}
+
+const showBookingRoomView = () => {
+  show([navBar, bookedRoomView])
+  hide([loginView, availableRoomsView, userDashboard, userCheckInView, filteredResultsView]);
 }
 
 
 console.log('This is the JavaScript entry file - your code begins here.');
+
+window.addEventListener('load', loadPage);
 
