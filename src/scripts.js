@@ -81,12 +81,13 @@ const loadPage = () => {
 const displayUserDashBoard = (user) => {
   console.log(user.totalSpent);
   user.roomsAlreadyBooked.forEach(booking => {
-    totalSpentLine.innerText = `So far, you have spent $${user.totalSpent}!`;
+    totalSpentLine.innerText = `So far, you have spent $${user.totalSpent}! Thank you for trusting OverLook!`;
     userDashboard.innerHTML += `
-    <p>${booking.id}</p>
-    <p>${booking.userID}</p>
-    <p>${booking.date}</p>
-    <p>${booking.roomNumber}</p>`
+    <section>
+    <p>Date: ${booking.date}</p>
+    <p>Id Number: ${booking.userID}</p>
+    <p>Room Number: ${booking.roomNumber}</p>
+    </section>`
   })
 }
 
