@@ -6,7 +6,8 @@ class User {
     this.name = user.name;
     this.roomsAlreadyBooked = []; //need a method for this
     this.totalSpent = 0;
-    this.availableBookings = [];
+    this.unavailableRooms = [];
+    this.availableRooms;
   }
 
   findBookedRooms = (bookings) => {
@@ -35,12 +36,27 @@ class User {
 
   findBookingsByDate = (date, bookings) => {
   bookings.forEach(booking => {
-    if(booking.date !== date) {
-      this.availableBookings.push(booking);
+    if(booking.date === date) {
+      this.unavailableRooms.push(booking);
     }
   })
   }
+
+  findAvailableRooms = (roomData) => {
+   let userAvailableRooms = this.unavailableRooms.reduce((acc, unavailableRooms) => {
+      roomData.forEach(room => { 
+        if(unavailableRooms.roomNumber !== room.number) {
+          acc.push(room)
+        }
+      })
+      return acc;
+    }, [])
+    this.availableRooms = userAvailableRooms;
+    return userAvailableRooms
+  }
+
 }
+
 
 
 
@@ -55,9 +71,9 @@ class User {
 // From the list of bookings that are availble for that day (an array),
 // We are going to take in the roomsData as a parameter, 
 // and then we are going to have the other available booking
-// array in the method , and then if the room number of the booking 
-// matches the room numbers of the room Data being typed in - filter ,
-// then push out the available rooms
+// array in the method , and then if the room number of the booking does NOT
+// match the room numbers of the room Data being typed in - filter ,
+// then push out the available rooms, because the rooms I have in my booking are NOT available
 
 
 
