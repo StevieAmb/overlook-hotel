@@ -4,3 +4,12 @@
 body {
   background: $primary-background;
 }
+
+.make-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.hidden {
+  display: none;
+}
