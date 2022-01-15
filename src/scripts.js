@@ -8,7 +8,9 @@ import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
+import Room from './Room';
 import User from './User';
+import Booking from './Booking';
 
 //QUERY SELECTORS
 
@@ -58,10 +60,25 @@ const getRandomIndex = (array) => {
 const loadPage = () => {
   getData()
   .then((data) => {
-    randomUser = new User(data[0].customers[getRandomIndex(data[0].customers)])
-    console.log("here i am", data[0].customers);
-    // user = new User
-    console.log(randomUser);
+    user = new User(data[0].customers[0]);
+    user.findBookedRooms(data[2].bookings)
+    displayUserDashBoard(user)
+    room = new Room(data[1].rooms);
+    console.log("a room", room);
+    booking = new Booking(data[2].bookings)
+    console.log(booking);
+  })
+  showUserDashBoardView();
+  displayUserDashBoard();
+}
+
+const displayUserDashBoard = (user) => {
+  user.roomsAlreadyBooked.forEach(booking => {
+    userDashboard.innerHTML += 
+    `<p>${booking.id}</p>
+    <p>${booking.userID}</p>
+    <p>${booking.date}</p>
+    <p>${booking.roomNumber}</p>`
   })
 }
 
@@ -104,7 +121,16 @@ const loadPage = () => {
 
 
 //DISPLAY FUNCTIONS
+// const displayUserDashBoard = () => {
+//   showUserDashBoardView();
+//   user.findBookedRooms(booking)
+// }
 
+// PSEUDOCODE
+
+// // //the user 1, has to match the booking by user ID in order to display
+// for each of the total booking data, if the user.id matched booking.userID,
+// then, display the booking. 
 
 
 
