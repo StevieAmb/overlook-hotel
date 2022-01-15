@@ -7,6 +7,9 @@ body {
 
 .make-row {
   display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: space-around;
   flex-direction: row;
 }
 
