@@ -81,6 +81,13 @@ const loadPage = () => {
   displayUserDashBoard();
 }
 
+const displayAvailableRooms = () => {
+  showAvailableRoomsView();
+  availableRoomsView.innerHTML = ``;
+  
+
+}
+
 const displayUserDashBoard = (user) => {
   totalSpentLine.innerText = "";
   userDashboard.innerHTML = "";
@@ -107,6 +114,18 @@ const showCalendarValue = (event) => {
 
 
 //EXECUTION FUNCTIONS
+// sortTags() {
+//   const result = cookbook.recipesCollection.reduce((acc, elem) => {
+//     elem.tags.forEach(tag => {
+//       if (!acc.includes(tag)) {
+//         acc.push(tag)
+//       }
+//     })
+//     return acc
+//   }, [])
+//   return result
+// },
+
 // showDropDown() {
 //   myDropdown.innerHTML = ``
 //   myDropdown.classList.toggle("show");
