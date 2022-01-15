@@ -9,17 +9,11 @@ const expect = chai.expect;
 describe('User', () => {
   let user1;
   let user2;
-  let booking1;
-  let booking2;
-  let booking3;
   
   beforeEach(() => {
     user1 = new User(userData[3])
     user2 = new User(userData[0])
     console.log(user1)
-    booking1 = new Booking(userBookingData[2])
-    booking2 = new Booking(userBookingData[5])
-    booking3 = new Booking(userBookingData[1])
   });
 
     it('Should be a function', () => {
@@ -53,8 +47,8 @@ describe('User', () => {
     it('Should tell you how much a user has spent on all their bookings so far', () => {
       user1.findBookedRooms(userBookingData);
 
-      let total = user1.getTotalSpentOnRooms(userRoomData);
-      expect(total).to.equal(836.58)
+      user1.getTotalSpentOnRooms(userRoomData);
+      expect(user1.totalSpent).to.equal(836.58)
     });
 
   })
