@@ -39,20 +39,19 @@ describe('User', () => {
     });
 
     it('Should have a list of all the bookings the user has made', () => {
-      user1.findBookedRooms(booking1);
-      user1.findBookedRooms(booking2);
+      user1.findBookedRooms(userBookingData);
   
       expect(user1.roomsAlreadyBooked.length).to.equal(2)
     });
 
     it('Should inspire the user to book a room if they have not booked any', () => {
-      let message = user2.findBookedRooms(booking3)
+      let message = user2.findBookedRooms(userBookingData)
+  
       expect(message).to.equal(`You haven't booked any rooms, yet! Get your vacation started with Overlook!`)
     });
 
     it('Should tell you how much a user has spent on all their bookings so far', () => {
-      user1.findBookedRooms(booking1);
-      user1.findBookedRooms(booking2);
+      user1.findBookedRooms(userBookingData);
 
       let total = user1.getTotalSpentOnRooms(userRoomData);
       expect(total).to.equal(836.58)

@@ -4,20 +4,31 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>OverLook Hotel</title>
 </head>
 <header>
-  <nav>
-    <h1>Overlook Hotel</h1>
+  <nav class="nav-bar" id="navBar">
+    <h1 class="page-title" id="pageTitle">Overlook Hotel</h1>
     <button class="home-button" id="homeButton">Home</button>
     <button class="see-user-dash" id="seeUserDash">See My Dashboard</button>
-    <button class="filter-by-type" id="filterByType">Filter by Type</button>
+    <div class="dropdown">
+      <button class="dropbtn" id="dropDownButton">Search By Room Type</button>
+      <div class="dropdown-content" id="myDropdown">
+        <a href="#tags">Tags</a>
+      </div>
+    </div>
   </nav>
 </header>
 <body>
-  <img src="../src/images/turing-logo.png" alt="turing logo">
-  <section class="home-page" id="homePage">
-<!-- Home page view -->
+  <img src="../src/images/turing-logo.png" id="turingLogo" alt="turing logo">
+  <section class="login-page" id="loginPageView">
+    <form>
+      <label for="userName">UserName:</label><br>
+      <input type="text" id="userName" name="username" required><br>
+      <label for="passWord">Password</label><br>
+      <input type="text" id="passWord" name="password" required><br><br>
+      <input type="submit" id="loginButton" value="Login">
+    </form> 
   </section>
 
   <section class="user-dashboard" id="userDashboard">
@@ -25,18 +36,22 @@
   </section>
 
   <section class="user-check-in" id="userCheckIn">
-<!-- User Check In View -->
+    <form action="/action_page.php">
+      <label for="birthday">Birthday:</label>
+      <input type="date" id="birthday" name="birthday">
+      <input type="submit">
+    </form>
   </section>
 
   <section class="available-rooms-view" id="availableRoomsView">
   <!-- User Available Rooms by Date View -->
   </section>
 
-  <section class="filter-results-view" id="filterResultsView">
+  <section class="filtered-results-view" id="filteredResultsView">
     <!-- Filtered Rooms View -->
   </section>
 
-  <section>
+  <section class="booked-room-view" id="bookedRoomView">
   <!-- Booked a room View (from clicking an available room) -->
   </section>
   
