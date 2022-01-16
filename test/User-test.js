@@ -72,8 +72,20 @@ describe('User', () => {
     it('Should be able to filter rooms based on room type', () => {
       user1.findBookingsByDate("2022/01/18", userBookingData)
       user1.findAvailableRooms(userRoomData);
-      console.log("here", user1.availableRooms);
+      let filteredRooms = user1.filterAvailableRooms('single room')
 
+      expect(filteredRooms[0]).to.equal(userRoomData[2])
+      expect(filteredRooms[1]).to.equal(userRoomData[3])
+      expect(filteredRooms[2]).to.equal(userRoomData[4])
+
+    })
+
+    it('Should send the user a message if no room of that type is available,', () => {
+      user1.findBookingsByDate("2022/01/18", userBookingData)
+      user1.findAvailableRooms(userRoomData);
+      let filteredRooms = user1.filterAvailableRooms('junior suite')
+
+      expect(filteredRooms).to.equal(`Sorry for the inconvenience! Please try another room type!`)
 
     })
 
