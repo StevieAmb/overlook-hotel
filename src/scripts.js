@@ -17,15 +17,16 @@ import Booking from './Booking';
 //BUTTONS
 const homeButton = document.getElementById('homeButton');
 const seeMyDashBoardButton = document.getElementById('seeUserDash');
-const roomTypeDropdownButton = document.getElementById('dropDownButton');
 const loginButton = document.getElementById('loginButton');
 const findRoomButton = document.getElementById('findARoom')
 const checkInButton = document.getElementById('checkInButton')
+const filterRoomsButton = document.getElementById('filterByRoomType');
 
 //USER INPUTS
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('loginButton');
 const dateInput = document.getElementById('checkInCalendar')
+const selectedtRoomTypeDropdown = document.getElementById('roomTypeSelection')
 
 
 //VIEWS
@@ -33,7 +34,6 @@ const loginView = document.getElementById('loginPageView')
 const userDashboard = document.getElementById('userDashboard');
 const userCheckInView = document.getElementById('userCheckIn');
 const availableRoomsView = document.getElementById('availableRoomsView');
-const filteredResultsView = document.getElementById('filteredResultsView');
 const bookedRoomView = document.getElementById('bookedRoomView');
 const navBar = document.getElementById('navBar');
 
@@ -109,69 +109,23 @@ const displayAvailableRooms = (event) => {
   })
 }
 
+const displayFilteredRooms = () => {
+  let wantedRooms = user.filterAvailableRooms(selectedtRoomTypeDropdown.value)
+  availableRoomsView.innerHTML = ``;
+  wantedRooms.forEach(wantedRoom => {
+    availableRoomsView.innerHTML += `
+    <section>
+    <p>Room Number: ${wantedRoom.number}</p>
+    <p>Room Type: ${wantedRoom.roomType}</p>
+    <p>Has a bidet: ${wantedRoom.bidet}</p>
+    <p>Bed size: ${wantedRoom.bedSize}</p>
+    <p>Number of beds: ${wantedRoom.numBeds}</p>
+    <p>Cost per night: ${wantedRoom.costPerNight}</p>
+    </section>
+    `
+  })
+}
 
-
-//HELPER FUNCTIONS
-
-
-
-
-
-//EXECUTION FUNCTIONS
-// sortTags() {
-//   const result = cookbook.recipesCollection.reduce((acc, elem) => {
-//     elem.tags.forEach(tag => {
-//       if (!acc.includes(tag)) {
-//         acc.push(tag)
-//       }
-//     })
-//     return acc
-//   }, [])
-//   return result
-// },
-
-// showDropDown() {
-//   myDropdown.innerHTML = ``
-//   myDropdown.classList.toggle("show");
-//   let allTags = domUpdates.sortTags();
-//   allTags.forEach((tag) => {
-//     myDropdown.insertAdjacentHTML('afterBegin', `<a class ="${tag}" href="#${tag}">${tag.toUpperCase()}</a>`)
-//   })
-// },
-            
-// searchByTags(event) {
-//   event.preventDefault();
-//   let findTags = domUpdates.sortTags();
-//   findTags.forEach((tag) => {
-//     if (event.target.className === tag) {
-//       domUpdates.showRecipeSearchResults();
-//       let searchedRecipeTag = cookbook.storeByTag(tag);
-
-//       recipeResultsView.innerHTML = ``
-//       searchedRecipeTag.forEach((elem) => {
-//         recipeResultsView.insertAdjacentHTML('afterBegin',
-//         `<article class="result-card" id="${elem.id}">
-//         <img class="result-image" alt="${elem.name}" src="${elem.image}" tabindex= "0">
-//         <h2>${elem.name}</h2>
-//         </article>`)
-//       })
-//     }
-//   })
-// },
-          
-                    
-                    
-//DISPLAY FUNCTIONS
-// const displayUserDashBoard = () => {
-//   showUserDashBoardView();
-//   user.findBookedRooms(booking)
-// }
-
-// PSEUDOCODE
-
-// // //the user 1, has to match the booking by user ID in order to display
-// for each of the total booking data, if the user.id matched booking.userID,
-// then, display the booking. 
 
 
 const show = (elements) => {
@@ -187,32 +141,27 @@ const hide = (elements) => {
 //VIEWS 
 const showUserDashBoardView = () => {
   show([userDashboard, seeMyDashBoardButton]);
-  hide([loginView, availableRoomsView, filteredResultsView, bookedRoomView, userCheckInView]);
+  hide([loginView, availableRoomsView, bookedRoomView, userCheckInView]);
 }
 
 const showLoginPageView = () => {
   show([loginView]);
-  hide([userDashboard, navBar, availableRoomsView, filteredResultsView, userCheckInView, bookedRoomView]);
+  hide([userDashboard, navBar, availableRoomsView, userCheckInView, bookedRoomView]);
 }
 
 const showAvailableRoomsView = () => {
   show([navBar, availableRoomsView]);
-  hide([loginView, userDashboard, filteredResultsView, userCheckInView, bookedRoomView]);
-}
-
-const showFilteredRoomsView = () => {
-  show([navBar, filteredResultsView])
-  hide([loginView, availableRoomsView, userDashboard, userCheckInView, bookedRoomView])
+  hide([loginView, userDashboard, userCheckInView, bookedRoomView]);
 }
 
 const showUserCheckInView = () => {
-  show([navBar,, userCheckInView]);
-  hide([loginView, availableRoomsView, userDashboard, userCheckInView, filteredResultsView]);
+  show([navBar, userCheckInView]);
+  hide([loginView, availableRoomsView, userDashboard]);
 }
                       
 const showBookingRoomView = () => {
   show([navBar, bookedRoomView])
-  hide([loginView, availableRoomsView, userDashboard, userCheckInView, filteredResultsView]);
+  hide([loginView, availableRoomsView, userDashboard, userCheckInView]);
 }
 
 
@@ -223,4 +172,4 @@ findRoomButton.addEventListener('click', showUserCheckInView)
 checkInButton.addEventListener('click', (event) => {
   displayAvailableRooms(event)
 });
-
+filterRoomsButton.addEventListener('click', displayFilteredRooms)
