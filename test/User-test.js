@@ -14,7 +14,6 @@ describe('User', () => {
   beforeEach(() => {
     user1 = new User(userData[3])
     user2 = new User(userData[0])
-    console.log(user1)
   });
 
     it('Should be a function', () => {
@@ -59,7 +58,14 @@ describe('User', () => {
       expect(user1.unavailableRooms[1]).to.equal(userBookingDdata[4])
     })
 
-    it('Should tell you available rooms based on rooms already booked', () => {
+    it('Should tell you available rooms based on the date', () => {
+      user1.findBookingsByDate("2022/02/16", userBookingData)
+      user1.findAvailableRooms(userRoomData);
+
+      expect(user1.availableRooms[0]).to.equal(userRoomData[0]);
+      expect(user1.availableRooms[1]).to.equal(userRoomData[1]);
+      expect(user1.availableRooms[2]).to.equal(userRoomData[3]);
+      expect(user1.availableRooms[3]).to.equal(userRoomData[5]);
 
     })
 
