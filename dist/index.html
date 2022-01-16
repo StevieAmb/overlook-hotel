@@ -12,12 +12,13 @@
     <button class="home-button" id="homeButton">Home</button>
     <button class="see-user-dash" id="seeUserDash">See My Dashboard</button>
     <button class="find-a-room" id="findARoom">Find Rooms</button>
-    <div class="dropdown">
-      <button class="dropbtn" id="dropDownButton">Search By Room Type</button>
-      <div class="dropdown-content" id="myDropdown">
-        <a href="#tags">Tags</a>
-      </div>
-    </div>
+    <select name="room-types" id="roomTypeSelection">
+      <option value="residential suite">Residential Suite</option>
+      <option value="suite">Suite</option>
+      <option value="single room">Single Room</option>
+      <option value="junior suite">Junior Suite</option>
+    </select>
+    <button class="filter-by-type" id="filterByRoomType">Search By Room Type</button>
   </nav>
 </header>
 <body>
@@ -32,12 +33,12 @@
     </form> 
   </section>
 
-  <section class="user-dashboard make-row hidden" id="userDashboard">
+  <section class="user-dashboard make-row" id="userDashboard">
     <h3 class="total-spent" id="totalSpent">Total User Spent</h3>
 <!-- User Dashboard View -->
   </section>
 
-  <section class="user-check-in" id="userCheckIn">
+  <section class="user-check-in hidden" id="userCheckIn">
       <label for="checkInCalendar">Pick a check in date:</label>
       <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2022-12-31">
       <input type="submit" id="checkInButton" value="Check In!">
