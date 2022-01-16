@@ -69,5 +69,14 @@ describe('User', () => {
 
     })
 
+    it('Should be able to filter rooms based on room type', () => {
+      user1.findBookingsByDate("2022/01/18", userBookingData)
+      user1.findAvailableRooms(userRoomData);
+      console.log("here", user1.availableRooms);
+
+
+    })
+
+
   })
     

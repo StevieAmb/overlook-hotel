@@ -51,6 +51,15 @@ class User {
     this.availableRooms = userAvailable;
   }
 
+  filterAvailableRooms = (desiredRoomType) => {
+    let wantedRooms = this.availableRooms.filter(availableRoom => {
+      if(availableRoom.roomType === desiredRoomType) {
+        return room;
+      }
+    })
+    return wantedRooms;
+  }
+
 }
 
 
