@@ -21,6 +21,7 @@ const loginButton = document.getElementById('loginButton');
 const findRoomButton = document.getElementById('findARoom')
 const checkInButton = document.getElementById('checkInButton')
 const filterRoomsButton = document.getElementById('filterByRoomType');
+let domButtons;
 
 //USER INPUTS
 const usernameInput = document.getElementById('username');
@@ -47,6 +48,7 @@ let rooms;
 let bookingsData;
 let roomsData;
 let singleUser;
+
 
 //FUNCTIONS
 
@@ -80,7 +82,7 @@ const displayUserDashBoard = (user, rooms, bookings) => {
   user.roomsAlreadyBooked.forEach(booking => {
     totalSpentLine.innerText = `So far, you have spent $${user.totalSpent}! Thank you for trusting OverLook!`;
     userDashboard.innerHTML += `
-    <section>
+    <section class="card-border">
     <p>Date: ${booking.date}</p>
     <p>Id Number: ${booking.userID}</p>
     <p>Room Number: ${booking.roomNumber}</p>
@@ -98,33 +100,51 @@ const displayAvailableRooms = (event) => {
   availableRoomsView.innerHTML = ``;
   user.availableRooms.forEach(availableRoom => {
     availableRoomsView.innerHTML +=
-    `<section>
+    `<section class="card-border" id="${availableRoom.number}">
     <p>Room Number: ${availableRoom.number}</p>
     <p>Room Type: ${availableRoom.roomType}</p>
     <p>Has a bidet: ${availableRoom.bidet}</p>
     <p>Bed size: ${availableRoom.bedSize}</p>
     <p>Number of beds: ${availableRoom.numBeds}</p>
     <p>Cost per night: ${availableRoom.costPerNight}</p>
+    <button class="book-room">Book This Room</button>
     </section>`
   })
+  domButtons = document.querySelectorAll('.book-room')
+  clickBookButton(domButtons);
 }
+
 
 const displayFilteredRooms = () => {
   let wantedRooms = user.filterAvailableRooms(selectedtRoomTypeDropdown.value)
   availableRoomsView.innerHTML = ``;
   wantedRooms.forEach(wantedRoom => {
     availableRoomsView.innerHTML += `
-    <section>
+    <section class="card-border" id="${wantedRooms.number}">
     <p>Room Number: ${wantedRoom.number}</p>
     <p>Room Type: ${wantedRoom.roomType}</p>
     <p>Has a bidet: ${wantedRoom.bidet}</p>
     <p>Bed size: ${wantedRoom.bedSize}</p>
     <p>Number of beds: ${wantedRoom.numBeds}</p>
     <p>Cost per night: ${wantedRoom.costPerNight}</p>
+    <button class="book-room">Book This Room</button>
     </section>
     `
   })
+  domButtons = document.querySelectorAll('book-room')
+  clickBookButton(domButtons);
 }
+
+const checkIfWorks = (event) => {
+  if(event.target.classList.contains('book-room')) {
+    console.log("hello hello")
+  }
+}
+
+
+
+
+
 
 
 
@@ -135,9 +155,9 @@ const show = (elements) => {
 const hide = (elements) => {
   elements.forEach(element => element.classList.add('hidden'));
 }
-                      
-                      
-                      
+
+
+
 //VIEWS 
 const showUserDashBoardView = () => {
   show([userDashboard, seeMyDashBoardButton]);
@@ -158,7 +178,7 @@ const showUserCheckInView = () => {
   show([navBar, userCheckInView]);
   hide([loginView, availableRoomsView, userDashboard]);
 }
-                      
+
 const showBookingRoomView = () => {
   show([navBar, bookedRoomView])
   hide([loginView, availableRoomsView, userDashboard, userCheckInView]);
@@ -173,3 +193,11 @@ checkInButton.addEventListener('click', (event) => {
   displayAvailableRooms(event)
 });
 filterRoomsButton.addEventListener('click', displayFilteredRooms)
+
+const clickBookButton = (domButtons) => {
+   domButtons.forEach(button => {
+          button.addEventListener('click', (e) => {
+       checkIfWorks(e)
+     })
+   })
+ }
