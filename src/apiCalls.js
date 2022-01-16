@@ -1,3 +1,5 @@
+import { errorHandling } from "./scripts"
+
 const fetchApiData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
     .then((response) => 
@@ -5,16 +7,15 @@ const fetchApiData = (type) => {
     .catch(error => console.log('fetch error', error))
 }
 
-const postBooking = () => {
+const postBooking = (post) => {
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      
-    })
-
+    body: JSON.stringify(post)
   })
-  .then(response => response.json())
+  .then(response => errorHandling(response))
   .then(data => console.log(data))
   .catch(err => console.log(err))
 }
+
+export { fetchApiData, postBooking }
