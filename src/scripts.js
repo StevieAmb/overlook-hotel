@@ -19,7 +19,7 @@ const homeButton = document.getElementById('homeButton');
 const seeMyDashBoardButton = document.getElementById('seeUserDash');
 const roomTypeDropdownButton = document.getElementById('dropDownButton');
 const loginButton = document.getElementById('loginButton');
-const bookARoomButton = document.getElementById('bookARoom')
+const findRoomButton = document.getElementById('findARoom')
 const checkInButton = document.getElementById('checkInButton')
 
 //USER INPUTS
@@ -42,56 +42,41 @@ const totalSpentLine = document.getElementById('totalSpent');
 
 //CLASS INSTANTIATIONS
 let user;
-let randomUser
-let booking;
-let room;
+let bookings;
+let rooms;
+let bookingsData;
+let roomsData;
+let singleUser;
 
 //FUNCTIONS
 
 function getData() {
   return Promise.all([fetchApiData('customers'), fetchApiData('rooms'), fetchApiData('bookings')]);
 }
-const show = (elements) => {
-  elements.forEach(element => element.classList.remove('hidden'));
-}
-
-const hide = (elements) => {
-  elements.forEach(element => element.classList.add('hidden'));
-}
 
 const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length);
 }
 
-const loadPage = () => {
+const pageLoad = () => {
   getData()
   .then((data) => {
-    //USER
-    user = new User(data[0].customers[0]);
-    user.findBookedRooms(data[2].bookings)
-    user.getTotalSpentOnRooms(data[1].rooms)
+    singleUser = data[0].customers[0]
+    user = new User(singleUser)
     
-    displayUserDashBoard(user)
-
-    console.log("$$$", user.totalSpent);
-    //BOOKINGS
-    booking = new Booking(data[2].bookings)
+    roomsData = data[1].rooms
+    
+    bookingsData = data[2].bookings
+    
+    displayUserDashBoard(user, roomsData, bookingsData);
   })
-  showUserDashBoardView();
-  displayUserDashBoard();
 }
 
-const displayAvailableRooms = () => {
-  showAvailableRoomsView();
-  availableRoomsView.innerHTML = ``;
-  
-
-}
-
-const displayUserDashBoard = (user) => {
+const displayUserDashBoard = (user, rooms, bookings) => {
   totalSpentLine.innerText = "";
   userDashboard.innerHTML = "";
-  console.log(user.totalSpent);
+  user.findBookedRooms(bookings)
+  user.getTotalSpentOnRooms(rooms);
   user.roomsAlreadyBooked.forEach(booking => {
     totalSpentLine.innerText = `So far, you have spent $${user.totalSpent}! Thank you for trusting OverLook!`;
     userDashboard.innerHTML += `
@@ -103,12 +88,31 @@ const displayUserDashBoard = (user) => {
   })
 }
 
+const displayAvailableRooms = (event) => {
+  event.preventDefault();
+  showAvailableRoomsView();
+  let betterDate = dateInput.value.split('-').join('/')
+  user.findBookingsByDate(betterDate, bookingsData)
+  user.findAvailableRooms(roomsData)
+  console.log("here", user.availableRooms)
+  availableRoomsView.innerHTML = ``;
+  user.availableRooms.forEach(availableRoom => {
+    availableRoomsView.innerHTML +=
+    `<section>
+    <p>Room Number: ${availableRoom.number}</p>
+    <p>Room Type: ${availableRoom.roomType}</p>
+    <p>Has a bidet: ${availableRoom.bidet}</p>
+    <p>Bed size: ${availableRoom.bedSize}</p>
+    <p>Number of beds: ${availableRoom.numBeds}</p>
+    <p>Cost per night: ${availableRoom.costPerNight}</p>
+    </section>`
+  })
+}
+
+
 
 //HELPER FUNCTIONS
-const showCalendarValue = (event) => {
-  event.preventDefault();
-  console.log(dateInput.value)
-}
+
 
 
 
@@ -134,7 +138,7 @@ const showCalendarValue = (event) => {
 //     myDropdown.insertAdjacentHTML('afterBegin', `<a class ="${tag}" href="#${tag}">${tag.toUpperCase()}</a>`)
 //   })
 // },
-
+            
 // searchByTags(event) {
 //   event.preventDefault();
 //   let findTags = domUpdates.sortTags();
@@ -142,7 +146,7 @@ const showCalendarValue = (event) => {
 //     if (event.target.className === tag) {
 //       domUpdates.showRecipeSearchResults();
 //       let searchedRecipeTag = cookbook.storeByTag(tag);
-      
+
 //       recipeResultsView.innerHTML = ``
 //       searchedRecipeTag.forEach((elem) => {
 //         recipeResultsView.insertAdjacentHTML('afterBegin',
@@ -154,9 +158,9 @@ const showCalendarValue = (event) => {
 //     }
 //   })
 // },
-
-
-
+          
+                    
+                    
 //DISPLAY FUNCTIONS
 // const displayUserDashBoard = () => {
 //   showUserDashBoardView();
@@ -170,9 +174,16 @@ const showCalendarValue = (event) => {
 // then, display the booking. 
 
 
+const show = (elements) => {
+  elements.forEach(element => element.classList.remove('hidden'));
+}
 
-
-
+const hide = (elements) => {
+  elements.forEach(element => element.classList.add('hidden'));
+}
+                      
+                      
+                      
 //VIEWS 
 const showUserDashBoardView = () => {
   show([userDashboard, seeMyDashBoardButton]);
@@ -185,8 +196,8 @@ const showLoginPageView = () => {
 }
 
 const showAvailableRoomsView = () => {
-  show([navBar, userDashboard]);
-  hide([loginView, availableRoomsView, filteredResultsView, userCheckInView, bookedRoomView]);
+  show([navBar, availableRoomsView]);
+  hide([loginView, userDashboard, filteredResultsView, userCheckInView, bookedRoomView]);
 }
 
 const showFilteredRoomsView = () => {
@@ -198,7 +209,7 @@ const showUserCheckInView = () => {
   show([navBar,, userCheckInView]);
   hide([loginView, availableRoomsView, userDashboard, userCheckInView, filteredResultsView]);
 }
-
+                      
 const showBookingRoomView = () => {
   show([navBar, bookedRoomView])
   hide([loginView, availableRoomsView, userDashboard, userCheckInView, filteredResultsView]);
@@ -207,7 +218,9 @@ const showBookingRoomView = () => {
 
 // console.log('This is the JavaScript entry file - your code begins here.');
 
-seeMyDashBoardButton.addEventListener('click', loadPage);
-bookARoomButton.addEventListener('click', showUserCheckInView);
-checkInButton.addEventListener('click', showCalendarValue)
+window.addEventListener('load', pageLoad);
+findRoomButton.addEventListener('click', showUserCheckInView)
+checkInButton.addEventListener('click', (event) => {
+  displayAvailableRooms(event)
+});
 
