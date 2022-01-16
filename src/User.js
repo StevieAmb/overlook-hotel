@@ -26,21 +26,28 @@ class User {
           acc += randomRoom.costPerNight
         }
       })
-      console.log(acc);
       return acc
     }, 0)
     this.totalSpent = totalUserSpent;
   }
 
-    findBookingsByDate = (date, bookings) => {
-      bookings.forEach(booking => {
-        if(booking.date === date) {
-      this.unavailableRooms.push(booking);
-      }
-    })
+  // findBookingsByDate = (date, bookings) => {
+  //     bookings.forEach(booking => {
+  //       if(booking.date === date) {
+  //     this.unavailableRooms.push(booking);
+  //     }
+  //   })
+  //   return this.unavailableRooms;
+  // }
+
+  findBookingsByDate = (date, bookings) => {
+    this.unavailableRooms = bookings.filter(booking => booking.date === date) 
   }
 
+
+
   findAvailableRooms = (roomData) => {
+    // this.findBookingsByDate()
     let unavailableRoomNumbers = this.unavailableRooms.map(unavailableRoom => unavailableRoom.roomNumber);
     let userAvailable = roomData.reduce((acc, room) => {
       if(!unavailableRoomNumbers.includes(room.number)) {
@@ -54,10 +61,14 @@ class User {
   filterAvailableRooms = (desiredRoomType) => {
     let wantedRooms = this.availableRooms.filter(availableRoom => {
       if(availableRoom.roomType === desiredRoomType) {
-        return room;
-      }
+        return availableRoom;
+      } 
     })
-    return wantedRooms;
+    if(wantedRooms.length > 0) {
+      return wantedRooms;
+    } else {
+      return `Sorry for the inconvenience! Please try another room type!`
+    }
   }
 
 }
