@@ -2,7 +2,7 @@
 // Do not delete or rename this file ********
 
 // An example of how you tell webpack to use a CSS (SCSS) file
-import { fetchApiData } from './apiCalls';
+import { fetchApiData, postBooking } from './apiCalls';
 
 import './css/base.scss';
 
@@ -40,6 +40,7 @@ const navBar = document.getElementById('navBar');
 
 //RANDOM QUERIES
 const totalSpentLine = document.getElementById('totalSpent');
+const errorHandlingLine = document.getElementById('handleMyError')
 
 //CLASS INSTANTIATIONS
 let user;
@@ -121,13 +122,13 @@ const displayFilteredRooms = () => {
   wantedRooms.forEach(wantedRoom => {
     availableRoomsView.innerHTML += `
     <section class="card-border" id="${wantedRooms.number}">
-    <p>Room Number: ${wantedRoom.number}</p>
-    <p>Room Type: ${wantedRoom.roomType}</p>
-    <p>Has a bidet: ${wantedRoom.bidet}</p>
-    <p>Bed size: ${wantedRoom.bedSize}</p>
-    <p>Number of beds: ${wantedRoom.numBeds}</p>
-    <p>Cost per night: ${wantedRoom.costPerNight}</p>
-    <button class="book-room">Book This Room</button>
+      <p>Room Number: ${wantedRoom.number}</p>
+      <p>Room Type: ${wantedRoom.roomType}</p>
+      <p>Has a bidet: ${wantedRoom.bidet}</p>
+      <p>Bed size: ${wantedRoom.bedSize}</p>
+      <p>Number of beds: ${wantedRoom.numBeds}</p>
+      <p>Cost per night: ${wantedRoom.costPerNight}</p>
+      <button class="book-room">Book This Room</button>
     </section>
     `
   })
@@ -137,9 +138,24 @@ const displayFilteredRooms = () => {
 
 const checkIfWorks = (event) => {
   if(event.target.classList.contains('book-room')) {
-    console.log("hello hello")
+    console.log('howdydoo!')
+    let post = {
+      userID: user.id,
+      date: dateInput.value.split('-').join('/'),
+      roomNumber: event.target.parentNode.id
+    }
+    postBooking(post)
   }
 }
+
+const errorHandling = (response) => {
+  if(!response.ok) {
+    return errorHandlingLine.innerText = `Sorry for the inconvenience! Please try again!`
+  } else {
+    return response.json();
+  }
+}
+
 
 
 
@@ -201,3 +217,5 @@ const clickBookButton = (domButtons) => {
      })
    })
  }
+
+ export { errorHandling }
