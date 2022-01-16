@@ -23,8 +23,6 @@ class User {
     let totalUserSpent = this.roomsAlreadyBooked.reduce((acc, userRoom) => {
       userRoomData.forEach(randomRoom => {
         if(userRoom.roomNumber === randomRoom.number) {
-          console.log("a sign", randomRoom.costPerNight);
-          console.log("a user room", userRoom);
           acc += randomRoom.costPerNight
         }
       })
@@ -34,25 +32,23 @@ class User {
     this.totalSpent = totalUserSpent;
   }
 
-  findBookingsByDate = (date, bookings) => {
-  bookings.forEach(booking => {
-    if(booking.date === date) {
+    findBookingsByDate = (date, bookings) => {
+      bookings.forEach(booking => {
+        if(booking.date === date) {
       this.unavailableRooms.push(booking);
-    }
-  })
+      }
+    })
   }
 
   findAvailableRooms = (roomData) => {
-   let userAvailableRooms = this.unavailableRooms.reduce((acc, unavailableRooms) => {
-      roomData.forEach(room => { 
-        if(unavailableRooms.roomNumber !== room.number) {
-          acc.push(room)
-        }
-      })
+    let unavailableRoomNumbers = this.unavailableRooms.map(unavailableRoom => unavailableRoom.roomNumber);
+    let userAvailable = roomData.reduce((acc, room) => {
+      if(!unavailableRoomNumbers.includes(room.number)) {
+        acc.push(room)
+      }
       return acc;
     }, [])
-    this.availableRooms = userAvailableRooms;
-    return userAvailableRooms
+    this.availableRooms = userAvailable;
   }
 
 }
