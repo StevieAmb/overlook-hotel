@@ -31,14 +31,6 @@ class User {
     this.totalSpent = totalUserSpent;
   }
 
-  // findBookingsByDate = (date, bookings) => {
-  //     bookings.forEach(booking => {
-  //       if(booking.date === date) {
-  //     this.unavailableRooms.push(booking);
-  //     }
-  //   })
-  //   return this.unavailableRooms;
-  // }
 
   findBookingsByDate = (date, bookings) => {
     this.unavailableRooms = bookings.filter(booking => booking.date === date) 
