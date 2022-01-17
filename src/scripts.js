@@ -116,12 +116,14 @@ const displayAvailableRooms = (event) => {
 }
 
 
-const displayFilteredRooms = () => {
+const displayFilteredRooms = (event) => {
+  event.preventDefault();
+  showBookingRoomView();
   let wantedRooms = user.filterAvailableRooms(selectedtRoomTypeDropdown.value)
-  availableRoomsView.innerHTML = ``;
+  bookedRoomView.innerHTML = ``;
   wantedRooms.forEach(wantedRoom => {
-    availableRoomsView.innerHTML += `
-    <section class="card-border" id="${wantedRooms.number}">
+    bookedRoomView.innerHTML += `
+    <section class="card-border" id="${wantedRoom.number}">
       <p>Room Number: ${wantedRoom.number}</p>
       <p>Room Type: ${wantedRoom.roomType}</p>
       <p>Has a bidet: ${wantedRoom.bidet}</p>
@@ -132,18 +134,20 @@ const displayFilteredRooms = () => {
     </section>
     `
   })
-  domButtons = document.querySelectorAll('book-room')
+  domButtons = document.querySelectorAll('.book-room')
   clickBookButton(domButtons);
 }
 
 const checkIfWorks = (event) => {
   if(event.target.classList.contains('book-room')) {
     console.log('howdydoo!')
+    let goodDate = dateInput.value.split('-').join('/')
     let post = {
       userID: user.id,
-      date: dateInput.value.split('-').join('/'),
-      roomNumber: event.target.parentNode.id
+      date: goodDate,
+      roomNumber: parseInt(event.target.parentNode.id)
     }
+    console.log(post);
     postBooking(post)
   }
 }
@@ -192,7 +196,7 @@ const showAvailableRoomsView = () => {
 
 const showUserCheckInView = () => {
   show([navBar, userCheckInView]);
-  hide([loginView, availableRoomsView, userDashboard]);
+  hide([loginView, availableRoomsView, userDashboard, bookedRoomView]);
 }
 
 const showBookingRoomView = () => {
