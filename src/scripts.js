@@ -16,9 +16,7 @@ import Booking from './Booking';
 
 //BUTTONS
 const homeButton = document.getElementById('homeButton');
-const seeMyDashBoardButton = document.getElementById('seeUserDash');
 const loginButton = document.getElementById('loginButton');
-const findRoomButton = document.getElementById('findARoom')
 const checkInButton = document.getElementById('checkInButton')
 const filterRoomsButton = document.getElementById('filterByRoomType');
 let domButtons;
@@ -179,18 +177,13 @@ const hide = (elements) => {
 
 
 //VIEWS 
-const showUserDashBoardView = () => {
-  show([userDashboard, seeMyDashBoardButton]);
-  hide([loginView, availableRoomsView, bookedRoomView, userCheckInView]);
-}
-
 const showLoginPageView = () => {
   show([loginView]);
   hide([userDashboard, navBar, availableRoomsView, userCheckInView, bookedRoomView]);
 }
 
 const showAvailableRoomsView = () => {
-  show([navBar, availableRoomsView]);
+  show([navBar, availableRoomsView, homeButton, filterRoomsButton, selectedtRoomTypeDropdown]);
   hide([loginView, userDashboard, userCheckInView, bookedRoomView]);
 }
 
@@ -208,11 +201,11 @@ const showBookingRoomView = () => {
 // console.log('This is the JavaScript entry file - your code begins here.');
 
 window.addEventListener('load', pageLoad);
-findRoomButton.addEventListener('click', showUserCheckInView)
 checkInButton.addEventListener('click', (event) => {
   displayAvailableRooms(event)
 });
 filterRoomsButton.addEventListener('click', displayFilteredRooms)
+// homeButton.addEventListener('click', )
 
 const clickBookButton = (domButtons) => {
    domButtons.forEach(button => {
