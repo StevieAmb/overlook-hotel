@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OverLook Hotel</title>
 </head>
-<header>
+<body>
   <nav class="nav-bar make-row" id="navBar">
     <h1 class="page-title" id="pageTitle">Overlook Hotel</h1>
     <button class="home-button" id="homeButton">Home</button>
@@ -20,42 +20,38 @@
     </select>
     <button class="filter-by-type" id="filterByRoomType">Search By Room Type</button>
   </nav>
-</header>
-<body>
-  <!-- <img src="../src/images/turing-logo.png" id="turingLogo" alt="turing logo"> -->
-  <section class="login-page hidden" id="loginPageView">
-    <form>
-      <label for="userName">UserName:</label><br>
-      <input type="text" id="userName" name="username" required><br>
-      <label for="passWord">Password</label><br>
-      <input type="text" id="passWord" name="password" required><br><br>
-      <input type="submit" id="loginButton" value="Login">
-    </form> 
-  </section>
+  <main>
+    <!-- <img src="../src/images/turing-logo.png" id="turingLogo" alt="turing logo"> -->
+    <section class="login-page hidden" id="loginPageView">
+      <form>
+        <label for="userName">UserName:</label><br>
+        <input type="text" id="userName" name="username" required><br>
+        <label for="passWord">Password</label><br>
+        <input type="text" id="passWord" name="password" required><br><br>
+        <input type="submit" id="loginButton" value="Login">
+      </form> 
+    </section>
 
-  <section class="user-dashboard make-row" id="userDashboard">
-    <h3 class="total-spent" id="totalSpent">Total User Spent</h3>
-<!-- User Dashboard View -->
-  </section>
+    <section class="user-dashboard make-row" id="userDashboard">
+      <h3 class="total-spent" id="totalSpent">Total User Spent</h3>
+    <!-- User Dashboard View -->
+    </section>
 
-  <section class="user-check-in hidden" id="userCheckIn">
-      <label for="checkInCalendar">Pick a check in date:</label>
-      <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2022-12-31">
-      <input type="submit" id="checkInButton" value="Check In!">
-  </section>
+    <section class="user-check-in hidden" id="userCheckIn">
+        <label for="checkInCalendar">Pick a check in date:</label>
+        <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2022-12-31">
+        <input type="submit" id="checkInButton" value="Check In!">
+    </section>
 
-  <section class="available-rooms-view make-row" id="availableRoomsView">
-  <!-- User Available Rooms by Date View -->
-  </section>
-
-  <section class="filtered-results-view hidden" id="filteredResultsView">
-    <!-- Filtered Rooms View -->
-  </section>
-
-  <section class="booked-room-view hidden" id="bookedRoomView">
-  <!-- Booked a room View (from clicking an available room) -->
-  </section>
-  
+    <section class="available-rooms-view make-row" id="availableRoomsView">
+      <!-- User Available Rooms by Date View -->
+    </section>
+    
+    <section class="booked-room-view make-row hidden" id="bookedRoomView">
+      <p class="handle-my-error" id="handleMyError">Error Handling Line</p>
+    <!-- Booked a room View (from clicking an available room) -->
+    </section>
+  </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 

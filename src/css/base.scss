@@ -5,10 +5,28 @@ body {
   background: $primary-background;
 }
 
+main {
+  padding-top: 7em;
+}
+
+nav {
+  background: $secondary-color;
+  position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.card-border {
+  border: 2px solid $tertiary-color;
+  padding: 10px;
+}
+
+
 .make-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 2em;
+  gap: 1em;
   justify-content: space-around;
   flex-direction: row;
 }
