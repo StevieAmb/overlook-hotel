@@ -42,8 +42,6 @@ const errorHandlingLine = document.getElementById('handleMyError')
 
 //CLASS INSTANTIATIONS
 let user;
-let bookings;
-let rooms;
 let bookingsData;
 let roomsData;
 let singleUser;
@@ -51,27 +49,48 @@ let singleUser;
 
 //FUNCTIONS
 
-function getData() {
-  return Promise.all([fetchApiData('customers'), fetchApiData('rooms'), fetchApiData('bookings')]);
+function getData(userID) {
+  return Promise.all([fetchSingleUser(userID), fetchApiData('rooms'), fetchApiData('bookings')])
+  .then(data => { 
+    [singleUser, roomsData, bookingsData] = [data[0], data[0].rooms, data[0].bookings]
+  });
 }
+
+//on click
+const loginUser = () => {
+  let userID = usernameInput.value.subStr(8);
+  if(userID > 0 && userID < 51 && passwordInput.value === 'overlook2021') {
+    getData(userID);
+    user = new User(singleUser)
+  }
+  displayUserDashBoard(user, roomsData, bookingsData)
+}
+
+
+
+
 
 const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length);
 }
 
-const pageLoad = () => {
-  getData()
-  .then((data) => {
-    singleUser = data[0].customers[0]
-    user = new User(singleUser)
+// //You are going to change this function to fire on click of login button
+// const pageLoad = () => {
+//   getData()
+//   .then((data) => {
+//     singleUser = data[0].customers[0]
+//     user = new User(singleUser)
     
-    roomsData = data[1].rooms
+//     roomsData = data[1].rooms
     
-    bookingsData = data[2].bookings
+//     bookingsData = data[2].bookings
     
-    displayUserDashBoard(user, roomsData, bookingsData);
-  })
-}
+//     displayUserDashBoard(user, roomsData, bookingsData);
+//   })
+// }
+
+
+
 
 const displayUserDashBoard = (user, rooms, bookings) => {
   totalSpentLine.innerText = "";
@@ -199,10 +218,11 @@ const showBookingRoomView = () => {
 
 // console.log('This is the JavaScript entry file - your code begins here.');
 
-window.addEventListener('load', pageLoad);
+// window.addEventListener('load', pageLoad);
 checkInButton.addEventListener('click', (event) => {
   displayAvailableRooms(event)
 });
+loginButton.addEventListener('click', loginUser)
 filterRoomsButton.addEventListener('click', displayFilteredRooms)
 // homeButton.addEventListener('click', )
 
