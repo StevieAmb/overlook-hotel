@@ -1,5 +1,6 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
+@import '_mixins';
 
 body {
   background: $primary-background;
@@ -7,8 +8,9 @@ body {
 
 main {
   display: flex;
-  justify-content: center;
-  padding-top: 7em;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3em;
   gap: 2em;
 }
 
@@ -31,6 +33,10 @@ button {
 button:hover,
 button:focus {
   background-color: $fourth-color;
+}
+
+.drop-down {
+  height: 3em;
 }
 
 .hero-image {
