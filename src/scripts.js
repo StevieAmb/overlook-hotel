@@ -95,7 +95,6 @@ const displayAvailableRooms = (event) => {
   let betterDate = dateInput.value.split('-').join('/')
   user.findBookingsByDate(betterDate, bookingsData)
   user.findAvailableRooms(roomsData)
-  console.log("here", user.availableRooms)
   availableRoomsView.innerHTML = ``;
   user.availableRooms.forEach(availableRoom => {
     availableRoomsView.innerHTML +=
