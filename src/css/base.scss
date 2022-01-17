@@ -1,20 +1,65 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
+@import '_mixins';
 
 body {
   background: $primary-background;
 }
 
 main {
-  padding-top: 7em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3em;
+  gap: 2em;
 }
+
 
 nav {
   background: $secondary-color;
-  position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+button {
+  height: 7vh;
+  border-radius: 17%;
+  background-color: $fifth-color;
+  margin-top: 1vh;
+}
+
+button:hover,
+button:focus {
+  background-color: $fourth-color;
+}
+
+.drop-down {
+  height: 3em;
+}
+
+.hero-image {
+  display: flex;
+  padding: 7em;
+  background-image: url('../images/hero-image.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.user-check-in {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 1em 1em;
+  margin-left: -5%;
+  width: 30%;
+  color: black; 
+  font-weight: bolder;
+  height: 10vh;
+  box-shadow: 0.5em 0.5em 0.5em $tertiary-color;
+  background-color: $primary-background;
+  border-radius: 37%;
 }
 
 .card-border {

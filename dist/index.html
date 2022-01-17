@@ -9,17 +9,22 @@
 <body>
   <nav class="nav-bar make-row" id="navBar">
     <h1 class="page-title" id="pageTitle">Overlook Hotel</h1>
-    <button class="home-button" id="homeButton">Home</button>
-    <button class="see-user-dash" id="seeUserDash">See My Dashboard</button>
-    <button class="find-a-room" id="findARoom">Find Rooms</button>
-    <select name="room-types" id="roomTypeSelection">
+    <button class="home-button hidden" id="homeButton">Home</button>
+    <select class="drop-down hidden" name="room-types" id="roomTypeSelection">
       <option value="residential suite">Residential Suite</option>
       <option value="suite">Suite</option>
       <option value="single room">Single Room</option>
       <option value="junior suite">Junior Suite</option>
     </select>
-    <button class="filter-by-type" id="filterByRoomType">Search By Room Type</button>
+    <button class="filter-by-type hidden" id="filterByRoomType">Search By Room Type</button>
   </nav>
+  <div class="hero-image">
+      <section tabindex="0" class="user-check-in" id="userCheckIn">
+          <label for="checkInCalendar">Pick a check in date:</label>
+          <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2022-12-31">
+          <input type="submit" id="checkInButton" value="Check In!">
+      </section>
+    </div>
   <main>
     <!-- <img src="../src/images/turing-logo.png" id="turingLogo" alt="turing logo"> -->
     <section class="login-page hidden" id="loginPageView">
@@ -31,17 +36,12 @@
         <input type="submit" id="loginButton" value="Login">
       </form> 
     </section>
-
+    <h2>My Bookings</h2>
+    <h3 class="total-spent" id="totalSpent">Total User Spent</h3>
     <section class="user-dashboard make-row" id="userDashboard">
-      <h3 class="total-spent" id="totalSpent">Total User Spent</h3>
     <!-- User Dashboard View -->
     </section>
 
-    <section class="user-check-in hidden" id="userCheckIn">
-        <label for="checkInCalendar">Pick a check in date:</label>
-        <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2022-12-31">
-        <input type="submit" id="checkInButton" value="Check In!">
-    </section>
 
     <section class="available-rooms-view make-row" id="availableRoomsView">
       <!-- User Available Rooms by Date View -->
