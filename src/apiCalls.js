@@ -1,8 +1,14 @@
 import { errorHandling } from "./scripts"
 
+const fetchApiData = (type) => {
+  return fetch(`http://localhost:3001/api/v1/${type}`)
+    .then((response) => 
+    response.json())
+    .catch(error => console.log('fetch error', error))
+}
 
 const fetchSingleUser = (userID) => {
-  return fetch(`http://localhost:3001/api/v1/${userID}`)
+  return fetch(`http://localhost:3001/api/v1/customers/${userID}`)
     .then((response) => response.json())
     .catch(error => console.log('fetch error', error))
 }
@@ -18,4 +24,4 @@ const postBooking = (post) => {
   .catch(err => console.log(err))
 }
 
-export { fetchSingleUser, postBooking }
+export { fetchSingleUser, fetchApiData, postBooking }
