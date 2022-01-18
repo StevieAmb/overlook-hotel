@@ -117,7 +117,7 @@ const displayAvailableRooms = (event) => {
   user.findBookingsByDate(betterDate, bookingsData)
   user.findAvailableRooms(roomsData)
   availableRoomsView.innerHTML = ``;
-  if(user.availableRooms.length > 0) {
+  if(user.availableRooms && user.availableRooms.length > 0) {
     user.availableRooms.forEach(availableRoom => {
       availableRoomsView.innerHTML +=
       `<section class="card-border" id="${availableRoom.number}">
@@ -130,14 +130,15 @@ const displayAvailableRooms = (event) => {
       <button class="book-room">Book This Room</button>
       </section>`
     })
-  } else {
+  } 
+    if (!user.availableRooms || user.availableRooms.length === 0) {
     availableRoomsView.innerHTML = `
     <p>Sorry, so sorry for the inconvenience! I beg of you, forgive us and
     try your search again!</p>`
+    }
+    domButtons = document.querySelectorAll('.book-room')
+    clickBookButton(domButtons);
   }
-  domButtons = document.querySelectorAll('.book-room')
-  clickBookButton(domButtons);
-}
 
 
 const displayFilteredRooms = (event) => {
@@ -145,7 +146,7 @@ const displayFilteredRooms = (event) => {
   showBookingRoomView();
   let wantedRooms = user.filterAvailableRooms(selectedtRoomTypeDropdown.value)
   bookedRoomView.innerHTML = ``;
-  if(wantedRooms.length > 0) {
+  if(wantedRooms && wantedRooms.length > 0) {
     wantedRooms.forEach(wantedRoom => {
       bookedRoomView.innerHTML += `
       <section class="card-border" id="${wantedRoom.number}">
@@ -158,15 +159,15 @@ const displayFilteredRooms = (event) => {
         <button class="book-room">Book This Room</button>
       </section>`
     })
-  } else {
-    let message = user.filterAvailableRooms(selectedtRoomTypeDropdown.value)
-    console.log(message)
-    bookedRoomView.innerHTML = `
-    <p>${message}</p>`
   }
-  domButtons = document.querySelectorAll('.book-room')
-  clickBookButton(domButtons);
-}
+    if(!wantedRooms || wantedRooms.length === 0) {
+      user.throwError()
+      bookedRoomView.innerHTML = `
+      <p>${user.message}</p>`
+    }
+    domButtons = document.querySelectorAll('.book-room')
+    clickBookButton(domButtons);
+  } 
 
 const checkIfWorks = (event) => {
   if(event.target.classList.contains('book-room')) {
