@@ -72,20 +72,22 @@ describe('User', () => {
     it('Should be able to filter rooms based on room type', () => {
       user1.findBookingsByDate("2022/01/18", userBookingData)
       user1.findAvailableRooms(userRoomData);
-      let filteredRooms = user1.filterAvailableRooms('single room')
+      user1.filterAvailableRooms('single room')
 
-      expect(filteredRooms[0]).to.equal(userRoomData[2])
-      expect(filteredRooms[1]).to.equal(userRoomData[3])
-      expect(filteredRooms[2]).to.equal(userRoomData[4])
+      expect(user1.wantedRooms[0]).to.equal(userRoomData[2])
+      expect(user1.wantedRooms[1]).to.equal(userRoomData[3])
+      expect(user1.wantedRooms[2]).to.equal(userRoomData[4])
 
     })
 
     it('Should send the user a message if no room of that type is available,', () => {
       user1.findBookingsByDate("2022/01/18", userBookingData)
       user1.findAvailableRooms(userRoomData);
-      let filteredRooms = user1.filterAvailableRooms('junior suite')
+      user1.filterAvailableRooms('junior suite')
+      user1.throwError();
+      
 
-      expect(filteredRooms).to.equal(`Sorry for the inconvenience! Please try another room type!`)
+      expect(user1.message).to.equal(`I am SO SORRY! Please forgive me! I beg your pardon, and I promise if you pick another room, you can have one a tiny home. On me.`)
 
     })
 

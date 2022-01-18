@@ -8,6 +8,8 @@ class User {
     this.totalSpent = 0;
     this.unavailableRooms = [];
     this.availableRooms;
+    this.wantedRooms = [];
+    this.message;
   }
 
   findBookedRooms = (bookings) => {
@@ -51,17 +53,22 @@ class User {
   }
 
   filterAvailableRooms = (desiredRoomType) => {
+    console.log("hey hey", this.availableRooms)
     let wantedRooms = this.availableRooms.filter(availableRoom => {
       if(availableRoom.roomType === desiredRoomType) {
         return availableRoom;
       } 
     })
-    if(wantedRooms.length > 0) {
-      return wantedRooms;
-    } else {
-      return `Sorry for the inconvenience! Please try another room type!`
-    }
+      this.wantedRooms = wantedRooms;
   }
+
+  throwError = () => {
+    let desired = this.wantedRooms;
+    console.log("here", desired)
+    if(desired.length === 0) {
+       this.message = `I am SO SORRY! Please forgive me! I beg your pardon, and I promise if you pick another room, you can have one a tiny home. On me.`
+    }
+}
 
 }
 

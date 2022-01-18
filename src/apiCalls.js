@@ -7,6 +7,12 @@ const fetchApiData = (type) => {
     .catch(error => console.log('fetch error', error))
 }
 
+const fetchSingleUser = (userID) => {
+  return fetch(`http://localhost:3001/api/v1/customers/${userID}`)
+    .then((response) => response.json())
+    .catch(error => console.log('fetch error', error))
+}
+
 const postBooking = (post) => {
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
@@ -18,4 +24,4 @@ const postBooking = (post) => {
   .catch(err => console.log(err))
 }
 
-export { fetchApiData, postBooking }
+export { fetchSingleUser, fetchApiData, postBooking }
