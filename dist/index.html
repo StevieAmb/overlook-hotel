@@ -19,7 +19,7 @@
     <button class="filter-by-type hidden" id="filterByRoomType">Search By Room Type</button>
   </nav>
   <div class="hero-image">
-      <section tabindex="0" class="user-check-in" id="userCheckIn">
+      <section tabindex="0" class="user-check-in hidden" id="userCheckIn">
           <label for="checkInCalendar">Pick a check in date:</label>
           <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2022-12-31">
           <input type="submit" id="checkInButton" value="Check In!">
@@ -27,17 +27,17 @@
     </div>
   <main>
     <!-- <img src="../src/images/turing-logo.png" id="turingLogo" alt="turing logo"> -->
-    <section class="login-page hidden" id="loginPageView">
+    <section class="login-page" id="loginPageView">
       <form>
         <label for="userName">UserName:</label><br>
         <input type="text" id="userName" name="username" required><br>
         <label for="passWord">Password</label><br>
-        <input type="text" id="passWord" name="password" required><br><br>
+        <input type="text" id="password" name="password" required><br><br>
         <input type="submit" id="loginButton" value="Login">
       </form> 
     </section>
-    <h2>My Bookings</h2>
-    <h3 class="total-spent" id="totalSpent">Total User Spent</h3>
+    <h2 class="welcome-message hidden" id="welcomeMessage">My Bookings</h2>
+    <h3 class="total-spent hidden" id="totalSpent">Total User Spent</h3>
     <section class="user-dashboard make-row" id="userDashboard">
     <!-- User Dashboard View -->
     </section>
