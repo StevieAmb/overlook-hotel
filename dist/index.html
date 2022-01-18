@@ -21,12 +21,12 @@
   <div class="hero-image">
       <section tabindex="0" class="user-check-in hidden" id="userCheckIn">
           <label for="checkInCalendar">Pick a check in date:</label>
-          <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2022-12-31">
+          <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2023-12-31" required>
           <input type="submit" id="checkInButton" value="Check In!">
       </section>
     </div>
+
   <main>
-    <!-- <img src="../src/images/turing-logo.png" id="turingLogo" alt="turing logo"> -->
     <section class="login-page" id="loginPageView">
       <form>
         <label for="userName">UserName:</label><br>
@@ -36,9 +36,11 @@
         <input type="submit" id="loginButton" value="Login">
       </form> 
     </section>
-    <h2 class="welcome-message hidden" id="welcomeMessage">My Bookings</h2>
-    <h3 class="total-spent hidden" id="totalSpent">Total User Spent</h3>
-    <section class="user-dashboard make-row" id="userDashboard">
+    <div class="messages-to-user" id="messagesToUser">
+      <h2 class="welcome-message hidden" id="welcomeMessage">My Bookings</h2>
+      <h3 class="total-spent hidden" id="totalSpent">Total User Spent</h3>
+    </div>
+    <section class="user-dashboard make-row hidden" id="userDashboard">
     <!-- User Dashboard View -->
     </section>
 
