@@ -4,7 +4,7 @@ class User {
   constructor(user) {
     this.id = user.id;
     this.name = user.name;
-    this.roomsAlreadyBooked = []; //need a method for this
+    this.roomsAlreadyBooked = [];
     this.totalSpent = 0;
     this.unavailableRooms = [];
     this.availableRooms;
