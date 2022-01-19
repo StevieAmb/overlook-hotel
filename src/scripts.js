@@ -46,6 +46,7 @@ let user;
 let bookingsData;
 let roomsData;
 let singleUser;
+let userID;
 
 
 //FUNCTIONS
@@ -54,12 +55,15 @@ let singleUser;
 
 function getData(userID) {
   return Promise.all([fetchSingleUser(userID), fetchApiData('rooms'), fetchApiData('bookings')])
-}
+  .then(data => { 
+    [singleUser, roomsData, bookingsData] = [data[0], data[1].rooms, data[2].bookings]})
+  }
+
 
 // on click
 const getLoginUserID = (input) => {
   let username = input.value
-  let userID = username.substring(8)
+  userID = username.substring(8)
   return userID;
 }
 
@@ -69,7 +73,7 @@ const loginUser = (event) => {
   if(userID > 0 && userID < 51 && passwordInput.value === 'overlook2021') {
   getData(userID)
   .then(data => { 
-    [singleUser, roomsData, bookingsData] = [data[0], data[1].rooms, data[2].bookings]
+    // [singleUser, roomsData, bookingsData] = [data[0], data[1].rooms, data[2].bookings]
     user = new User(singleUser)
     console.log(user);
       domUpdates.showUserDashboard();
@@ -91,7 +95,6 @@ const gatherAvailableRooms = (event) => {
     user.throwError();
     domUpdates.displayAvailableRooms();
   }
-
 }
 
 const gatherUserDashBoard = (user, bookings, rooms) => {
@@ -112,6 +115,10 @@ const filterRooms = (event) => {
     }
 }
 
+const reloadData = () => {
+  gatherUserDashBoard(user, bookingsData, roomsData)
+  domUpdates.showUserDashboard();
+}
 
 
 
@@ -124,6 +131,7 @@ const postUserBooking = (event) => {
       roomNumber: parseInt(event.target.parentNode.id)
     }
     postBooking(post)
+    .then(getData(userID))
     domUpdates.showThankYouScreen()
   }
 }
@@ -147,7 +155,7 @@ const hide = (elements) => {
 }
 //EVENT LISTENERS
 
-homeButton.addEventListener('click', domUpdates.showUserDashboard)
+homeButton.addEventListener('click', reloadData)
 
 loginButton.addEventListener('click', (e) => {
   loginUser(e)
@@ -182,7 +190,9 @@ const clickBookButton = (domButtons) => {
   userDashboard, 
   availableRoomsView, 
   bookedRoomView, 
-  selectedtRoomTypeDropdown, 
+  selectedtRoomTypeDropdown,
+  getLoginUserID, 
+  getData,
   postErrorHandling,
   show, 
   hide 
