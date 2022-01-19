@@ -6,9 +6,13 @@ body {
   background: $primary-background;
 }
 
+h1 {
+  color: white;
+  font-stretch: ultra-expanded;
+}
+
 main {
-  display: flex;
-  flex-direction: column;
+  @include make-column();
   align-items: center;
   padding-top: 3em;
   gap: 2em;
@@ -23,21 +27,24 @@ nav {
   top: 0;
 }
 
+#loginButton,
 button {
   height: 7vh;
+  width: 7vw;
   border-radius: 17%;
   background-color: $fifth-color;
   margin-top: 1vh;
-}
-
-button:hover,
-button:focus {
-  background-color: $fourth-color;
+  font-size: larger;
 }
 
 .drop-down {
   height: 3em;
 }
+
+.filter-room-section {
+  gap: 1em;
+}
+
 
 .hero-image {
   display: flex;
@@ -62,10 +69,20 @@ button:focus {
   border-radius: 37%;
 }
 
+.message-to-user {
+  @include make-column()
+}
+
 .card-border {
   border: 2px solid $tertiary-color;
   padding: 10px;
 }
+
+.card-border:hover,
+.card-border:focus {
+  @include card-decor()
+}
+
 
 
 .make-row {
