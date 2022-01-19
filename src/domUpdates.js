@@ -98,7 +98,7 @@ displayFilteredRooms(event) {
   //VIEWS 
   showUserDashboard() {
     show([userCheckInView, navBar, userDashboard, messagesToUser])
-    hide([availableRoomsView, bookedRoomView, loginView, thankYouScreen])
+    hide([availableRoomsView, bookedRoomView, loginView, thankYouScreen, homeButton])
   },
   
   showAvailableRoomsView() {
