@@ -49,14 +49,9 @@ let singleUser;
 
 
 //FUNCTIONS
-
-//HELPER FUNCTIONS
-
 function getData(userID) {
   return Promise.all([fetchSingleUser(userID), fetchApiData('rooms'), fetchApiData('bookings')])
 }
-
-// on click
 const getLoginUserID = (input) => {
   let username = input.value
   let userID = username.substring(8)
@@ -77,7 +72,6 @@ const loginUser = (event) => {
     });
   }
 }
-
 
 const gatherAvailableRooms = (event) => {
   event.preventDefault();
@@ -127,8 +121,6 @@ const postUserBooking = (event) => {
   }
 }
 
-
-
 const postErrorHandling = (response) => {
   if(!response.ok) {
     throw new Error("I'm SO sorry this has happened like this. Have you tried turning off and turning it on again?")
@@ -136,7 +128,6 @@ const postErrorHandling = (response) => {
     return response.json();
   }
 }
-
 
 const show = (elements) => {
   elements.forEach(element => element.classList.remove('hidden'));

@@ -8,7 +8,4 @@ class Booking {
   }
 }
 
-
-//method to get room service charges.
-
 export default Booking;

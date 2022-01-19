@@ -1,5 +1,5 @@
 import domUpdates from './domUpdates'
-import { postErrorHandling, getData } from './scripts'
+import { postErrorHandling } from './scripts'
 
 const fetchApiData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
