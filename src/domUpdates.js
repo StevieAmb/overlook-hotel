@@ -29,6 +29,7 @@ const thankYouScreen = document.getElementById('thankYouScreen');
 //RANDOM QUERIES
 const totalSpentLine = document.getElementById('totalSpent');
 const messagesToUser = document.getElementById('messagesToUser');
+const errorHandlingLine = document.getElementById('handleMyError')
 
 
 

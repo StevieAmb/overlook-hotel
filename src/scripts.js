@@ -138,7 +138,9 @@ const hide = (elements) => {
 }
 //EVENT LISTENERS
 
-homeButton.addEventListener('click', domUpdates.showUserDashboard)
+homeButton.addEventListener('click', (e) => {
+  loginUser(e)
+})
 
 loginButton.addEventListener('click', (e) => {
   loginUser(e)
