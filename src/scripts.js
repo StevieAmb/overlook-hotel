@@ -46,7 +46,6 @@ let user;
 let bookingsData;
 let roomsData;
 let singleUser;
-let userID;
 
 
 //FUNCTIONS
@@ -55,15 +54,12 @@ let userID;
 
 function getData(userID) {
   return Promise.all([fetchSingleUser(userID), fetchApiData('rooms'), fetchApiData('bookings')])
-  .then(data => { 
-    [singleUser, roomsData, bookingsData] = [data[0], data[1].rooms, data[2].bookings]})
-  }
-
+}
 
 // on click
 const getLoginUserID = (input) => {
   let username = input.value
-  userID = username.substring(8)
+  let userID = username.substring(8)
   return userID;
 }
 
@@ -73,7 +69,7 @@ const loginUser = (event) => {
   if(userID > 0 && userID < 51 && passwordInput.value === 'overlook2021') {
   getData(userID)
   .then(data => { 
-    // [singleUser, roomsData, bookingsData] = [data[0], data[1].rooms, data[2].bookings]
+    [singleUser, roomsData, bookingsData] = [data[0], data[1].rooms, data[2].bookings]
     user = new User(singleUser)
     console.log(user);
       domUpdates.showUserDashboard();
@@ -95,6 +91,7 @@ const gatherAvailableRooms = (event) => {
     user.throwError();
     domUpdates.displayAvailableRooms();
   }
+
 }
 
 const gatherUserDashBoard = (user, bookings, rooms) => {
@@ -115,26 +112,21 @@ const filterRooms = (event) => {
     }
 }
 
-const reloadData = () => {
-  gatherUserDashBoard(user, bookingsData, roomsData)
-  domUpdates.showUserDashboard();
-}
-
-
-
 const postUserBooking = (event) => {
   if(event.target.classList.contains('book-room')) {
+    console.log('howdydoo!')
     let goodDate = dateInput.value.split('-').join('/')
     let post = {
       userID: user.id,
       date: goodDate,
       roomNumber: parseInt(event.target.parentNode.id)
     }
+    console.log(post);
     postBooking(post)
-    .then(getData(userID))
-    domUpdates.showThankYouScreen()
+    domUpdates.showThankYouScreen();
   }
 }
+
 
 
 const postErrorHandling = (response) => {
@@ -155,7 +147,7 @@ const hide = (elements) => {
 }
 //EVENT LISTENERS
 
-homeButton.addEventListener('click', reloadData)
+homeButton.addEventListener('click', domUpdates.showUserDashboard)
 
 loginButton.addEventListener('click', (e) => {
   loginUser(e)
@@ -190,9 +182,7 @@ const clickBookButton = (domButtons) => {
   userDashboard, 
   availableRoomsView, 
   bookedRoomView, 
-  selectedtRoomTypeDropdown,
-  getLoginUserID, 
-  getData,
+  selectedtRoomTypeDropdown, 
   postErrorHandling,
   show, 
   hide 
