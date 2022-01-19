@@ -45,22 +45,21 @@ Wanna book another room? I'm sure you remember how to do that, too. Just use our
 
 ![Screen Shot 2022-01-18 at 8 39 14 PM](https://user-images.githubusercontent.com/89324625/150060171-6d1f70f3-1361-474c-9b11-fa1ede47df4a.png)
 
-Users can favorite a recipe and view it.
-favorite-recipe
+See one you like?
+BOOK IT!
 
-Users can click on a recipe in the list to see the directions and instructions. recipe-info
+![Screen Shot 2022-01-18 at 8 39 34 PM](https://user-images.githubusercontent.com/89324625/150060194-d69e78e2-ae48-4f60-8ccf-841eb2371c0f.png)
 
-Users can use the dropdown to search through filtered tags for recipes search-recipe
-
+I'm really glad you made another reservation with us! I'm sure you'll enjoy it!
 
 ### _Links_
-Checkout the Turing spec sheet here
+Checkout the Turing spec sheet [here](https://frontend.turing.edu/projects/overlook.html)
 
-Checkout the our GitHub Repo here
+Checkout the GitHub Repo [here](https://github.com/StevieAmb/overlook-hotel)
 
 
 ### _Future Additions_
-Add functionality for adding ingredients to user's Pantry
+- I want to add functionality for rating a room that you stayed in.
 
 ### _Contributors_
 Stevie Ambroise
@@ -78,14 +77,3 @@ Turing Cohort 2110
 - Fetch API
 - Webpack
 - SASS
-
-
-
-User DashBoard
-
-
-Book A Room
-
-Thank You Screen
-
-![Screen Shot 2022-01-18 at 8 39 34 PM](https://user-images.githubusercontent.com/89324625/150060194-d69e78e2-ae48-4f60-8ccf-841eb2371c0f.png)
