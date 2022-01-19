@@ -1,0 +1,12 @@
+@mixin card-decor() {
+  box-shadow: 0px 8px 15px #5E6472;
+  background-color:beige;
+  height: 30%;
+  width: 30%;
+  font-size: large;
+}
+
+@mixin make-column() {
+  display: flex;
+  flex-direction: column;
+}

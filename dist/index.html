@@ -9,23 +9,24 @@
 <body>
   <nav class="nav-bar make-row" id="navBar">
     <h1 class="page-title" id="pageTitle">Overlook Hotel</h1>
-    <button class="home-button hidden" id="homeButton">Home</button>
-    <select class="drop-down hidden" name="room-types" id="roomTypeSelection">
-      <option value="residential suite">Residential Suite</option>
-      <option value="suite">Suite</option>
-      <option value="single room">Single Room</option>
-      <option value="junior suite">Junior Suite</option>
-    </select>
-    <button class="filter-by-type hidden" id="filterByRoomType">Search By Room Type</button>
-  </nav>
+    <button class="home-button hidden" id="homeButton">My Dashboard</button>
+   <div class="filter-room-section">
+      <select class="drop-down hidden" name="room-types" id="roomTypeSelection">
+        <option value="residential suite">Residential Suite</option>
+        <option value="suite">Suite</option>
+        <option value="single room">Single Room</option>
+        <option value="junior suite">Junior Suite</option>
+      </select>
+      <button class="filter-by-type hidden" id="filterByRoomType">By Room Type</button>
+    </nav>
+  </div>
   <div class="hero-image">
-      <section tabindex="0" class="user-check-in hidden" id="userCheckIn">
-          <label for="checkInCalendar">Pick a check in date:</label>
-          <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2023-12-31" required>
-          <input type="submit" id="checkInButton" value="Check In!">
-      </section>
-    </div>
-
+    <section tabindex="0" class="user-check-in hidden" id="userCheckIn">
+      <label for="checkInCalendar">Pick a check in date:</label>
+      <input type="date" id="checkInCalendar" name="checkin" value="2022-01-15" min="2022-01-20" max="2023-12-31" required>
+      <input type="submit" id="checkInButton" value="Check In!">
+    </section>
+  </div>
   <main>
     <section class="login-page" id="loginPageView">
       <form>
@@ -36,25 +37,24 @@
         <input type="submit" id="loginButton" value="Login">
       </form> 
     </section>
-    <div class="messages-to-user" id="messagesToUser">
-      <h2 class="welcome-message hidden" id="welcomeMessage">My Bookings</h2>
-      <h3 class="total-spent hidden" id="totalSpent">Total User Spent</h3>
-    </div>
-    <section class="user-dashboard make-row hidden" id="userDashboard">
-    <!-- User Dashboard View -->
-    </section>
-
-
+    <article>
+      <div class="messages-to-user hidden" id="messagesToUser">
+        <h2 class="welcome-message" id="welcomeMessage">My Bookings</h2>
+        <h3 class="total-spent" id="totalSpent">Total User Spent</h3>
+      </div>
+      <section class="user-dashboard make-row hidden" id="userDashboard">
+        <p class="handle-my-error" id="handleMyError">Error Handling Line</p>
+      </section>
+    </article>
     <section class="available-rooms-view make-row" id="availableRoomsView">
-      <!-- User Available Rooms by Date View -->
     </section>
-    
     <section class="booked-room-view make-row hidden" id="bookedRoomView">
-      <p class="handle-my-error" id="handleMyError">Error Handling Line</p>
-    <!-- Booked a room View (from clicking an available room) -->
+    </section>
+    <section class="thank-you-screen hidden" id="thankYouScreen">
+      <h1>Your booking was successful! Thank you for trusting OverLook with your vaction needs!</h1>
+      <h4>Please come see us again soon!</h4>
     </section>
   </main>
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
 </body>

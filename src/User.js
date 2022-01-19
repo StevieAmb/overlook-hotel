@@ -4,7 +4,7 @@ class User {
   constructor(user) {
     this.id = user.id;
     this.name = user.name;
-    this.roomsAlreadyBooked = []; //need a method for this
+    this.roomsAlreadyBooked = [];
     this.totalSpent = 0;
     this.unavailableRooms = [];
     this.availableRooms;
@@ -41,7 +41,6 @@ class User {
 
 
   findAvailableRooms = (roomData) => {
-    // this.findBookingsByDate()
     let unavailableRoomNumbers = this.unavailableRooms.map(unavailableRoom => unavailableRoom.roomNumber);
     let userAvailable = roomData.reduce((acc, room) => {
       if(!unavailableRoomNumbers.includes(room.number)) {
@@ -53,7 +52,6 @@ class User {
   }
 
   filterAvailableRooms = (desiredRoomType) => {
-    console.log("hey hey", this.availableRooms)
     let wantedRooms = this.availableRooms.filter(availableRoom => {
       if(availableRoom.roomType === desiredRoomType) {
         return availableRoom;
@@ -64,7 +62,6 @@ class User {
 
   throwError = () => {
     let desired = this.wantedRooms;
-    console.log("here", desired)
     if(desired.length === 0) {
        this.message = `I am SO SORRY! Please forgive me! I beg your pardon, and I promise if you pick another room, you can have one a tiny home. On me.`
     }
