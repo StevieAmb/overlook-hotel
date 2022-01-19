@@ -1,5 +1,5 @@
 import domUpdates from './domUpdates'
-import { postErrorHandling } from './scripts'
+import { postErrorHandling, getData } from './scripts'
 
 const fetchApiData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
@@ -21,7 +21,6 @@ const postBooking = (post) => {
     body: JSON.stringify(post)
   })
   .then(response => postErrorHandling(response))
-  .then()
   .then(data => console.log(data))
   .catch(err => console.log(err))
 }
